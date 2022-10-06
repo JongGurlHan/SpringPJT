@@ -32,21 +32,21 @@
 </head>
 
 <body class="text-center">
-<form class="form-signup" th:action="@{/auth/signup}" method = "post">
-    <img class="mb-4" src="/docs/4.5/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+
+<form class="form-signup" th:action="@{/auth/signup}" method="post">
     <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
 
-    <label for="inputEmail" class="sr-only">이메일</label>
-    <input type="email" id="inputEmail" class="form-control" placeholder="이메일" required="required" autofocus>
+    <label for="email" class="sr-only">이메일</label>
+    <input type="email" id="email" name="email" class="form-control" placeholder="이메일" required="required" />
 
-    <label for="inputName" class="sr-only">이름</label>
-    <input type="text" id="inputName" class="form-control" placeholder="이름" required="required">
+    <label for="username" class="sr-only">이름</label>
+    <input type="text"  id="username"name="username"  class="form-control"placeholder="유저네임" required="required" />
 
-    <label for="inputPassword" class="sr-only">패스워드</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
-
-    <button class="btn btn-lg btn-primary btn-block" type="submit">가입</button>
+    <label for="password" class="sr-only">패스워드</label>
+    <input type="password" id="password" name="password" class="form-control" placeholder="패스워드" required="required" />
+    <button class="btn btn-lg btn-primary btn-block">가입</button>
     <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
+
 </form>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
