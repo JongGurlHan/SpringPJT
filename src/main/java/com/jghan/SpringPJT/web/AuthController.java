@@ -1,10 +1,9 @@
 package com.jghan.SpringPJT.web;
 
 import com.jghan.SpringPJT.domain.user.User;
-import com.jghan.SpringPJT.handler.CustomValidationException;
+import com.jghan.SpringPJT.handler.ex.CustomValidationException;
 import com.jghan.SpringPJT.service.AuthService;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.GeneratorType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;

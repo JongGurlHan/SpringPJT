@@ -1,4 +1,4 @@
-package com.jghan.SpringPJT.handler;
+package com.jghan.SpringPJT.handler.ex;
 
 import java.util.Map;
 
