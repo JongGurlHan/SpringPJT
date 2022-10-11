@@ -30,6 +30,8 @@ public class User {
 
     private String profileImageUrl;
     private String role;
+    private String phone;
+
 
     private LocalDateTime createDate;
 

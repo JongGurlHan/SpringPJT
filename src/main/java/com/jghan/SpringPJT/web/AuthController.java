@@ -3,6 +3,7 @@ package com.jghan.SpringPJT.web;
 import com.jghan.SpringPJT.domain.user.User;
 import com.jghan.SpringPJT.handler.ex.CustomValidationException;
 import com.jghan.SpringPJT.service.AuthService;
+import com.jghan.SpringPJT.web.dto.auth.SignupDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
