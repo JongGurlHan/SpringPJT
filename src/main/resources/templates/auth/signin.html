@@ -33,23 +33,28 @@
 </head>
 
 <body class="text-center">
-<form class="form-signin">
+<form class="form-signin"  th:action="@{/auth/signin}" method="post">
     <img class="mb-4" src="/docs/4.5/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">로그인</h1>
 
-    <label for="inputEmail" class="sr-only">이메일</label>
-    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="required" autofocus>
-    <label for="inputPassword" class="sr-only">Password</label>
+    <label for="username" class="sr-only">유저네임</label>
+    <input type="text" name = "username" id="username" class="form-control" placeholder="유저네임" required="required" autofocus>
 
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
-    <button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
+
+    <label for="password" class="sr-only">Password</label>
+    <input type="password" id="password" name = "password" class="form-control" placeholder="비밀번호" required="required">
+
+    <button class="btn btn-lg btn-primary btn-block" >로그인</button>
 
     <div class="login__register">
         <span>계정이 없으신가요?</span>
         <a href="/auth/signup">가입하기</a>
     </div>
     <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
+
 </form>
+
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

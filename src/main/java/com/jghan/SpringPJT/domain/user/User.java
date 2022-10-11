@@ -21,8 +21,10 @@ public class User {
 
     @Column(nullable = false)
     private String email;
+
     @Column(length = 10, unique = true) //Oauth2로그인을 위해 컬럼 늘리기
     private String username;
+
     @Column(nullable = false)
     private String password;
 

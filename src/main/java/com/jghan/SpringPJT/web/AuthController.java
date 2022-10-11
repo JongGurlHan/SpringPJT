@@ -20,11 +20,6 @@ public class AuthController {
 
     private final AuthService authService;
 
-    @GetMapping("/")
-    public String home(){
-        return "home";
-    }
-
     @GetMapping("/auth/signin")
     public String signinForm(){
         return "auth/signin";
@@ -47,7 +42,7 @@ public class AuthController {
         }else{
             User user = signupDto.toEntity();
             authService.register(user);
-            return "auth/signup";
+            return "auth/signin";
         }
     }
 }

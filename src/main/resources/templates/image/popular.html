@@ -1,0 +1,32 @@
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!--<%@ include file="../layout/header.jsp"%>-->
+<div th:replace="layout/header" :: menu />
+
+<!--인기 게시글-->
+<main class="popular">
+    <div class="exploreContainer">
+
+        <!--인기게시글 갤러리(GRID배치)-->
+        <div class="popular-gallery">
+
+            <tr th:each="image : ${images}">
+
+                <div class="p-img-box">
+                    <a href="/user/${image.user.id}" th:href="|/user/${image.user.id}|" >
+                        <img src="/images/home.jpg" th:src="@{|https://instaclonepjt-bucket.s3.ap-northeast-2.amazonaws.com/${image.postImageUrl}|}" />
+
+                    </a>
+                </div>
+            </tr>
+
+
+
+        </div>
+
+    </div>
+</main>
+
+<div th:replace="layout/footer" :: footer />
+
