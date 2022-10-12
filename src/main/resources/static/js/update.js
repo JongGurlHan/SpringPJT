@@ -1,4 +1,4 @@
-(// (1) 회원정보 수정
+// (1) 회원정보 수정
 
 function update(userId, event) {
     event.preventDefault(); //폼태그 액션을 막기
