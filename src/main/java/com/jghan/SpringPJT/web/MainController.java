@@ -17,6 +17,12 @@ public class MainController { //추후 이름변경
 
         return "main/main";
     }
+    @GetMapping("/main/test")
+    public String test(){
+        return "main/test";
+    }
+
+
 
     @GetMapping("/matzip/input")
     public String matzipInput(){
