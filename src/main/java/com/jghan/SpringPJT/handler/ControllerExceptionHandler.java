@@ -6,6 +6,7 @@ import com.jghan.SpringPJT.handler.ex.CustomValidationApiException;
 import com.jghan.SpringPJT.handler.ex.CustomValidationException;
 import com.jghan.SpringPJT.util.Script;
 import com.jghan.SpringPJT.web.dto.CMResDto;
+import com.jghan.SpringPJT.web.dto.CMRespDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
