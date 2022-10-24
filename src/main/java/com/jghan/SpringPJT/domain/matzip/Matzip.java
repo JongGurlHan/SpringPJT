@@ -28,6 +28,9 @@ public class Matzip {
     @Column(nullable = false)   //경도
     private String lng;
 
+    @Column(nullable = false)   //경도
+    private String comment;
+
     private LocalDateTime createDate;
 
     @PrePersist

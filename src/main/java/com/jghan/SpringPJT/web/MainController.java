@@ -24,10 +24,6 @@ public class MainController { //추후 이름변경
 
 
 
-    @GetMapping("/matzip/input")
-    public String matzipInput(){
 
-        return "main/matzipInput";
-    }
 
 }
