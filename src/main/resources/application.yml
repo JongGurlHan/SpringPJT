@@ -23,3 +23,7 @@ spring:
     user:
       name: test
       password: '1234'
+
+
+file:
+  path: F:/springpjt/upload2/data/
