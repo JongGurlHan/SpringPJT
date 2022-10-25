@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class MatzipService {
@@ -17,5 +19,12 @@ public class MatzipService {
         Matzip matzipEntity = matzipRepository.save(matzip);
         return matzipEntity;
     }
+
+    @Transactional
+    public List<Matzip> matzipList(){
+        return matzipRepository.findAll();
+    }
+
+
 
 }
