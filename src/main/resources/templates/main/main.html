@@ -12,7 +12,6 @@
 
 <a th:href="@{/matzip/input}">맛집등록</a>
 
-
 <div id="map" style="width:100%;height:800px;"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4a0d83340721dd0aa7133f7c63bcccf3"></script>
@@ -33,27 +32,29 @@ var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니
 
 // 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다
 
-var positions =[];
+let matzipList =[];
 for (var i = 0; i < matzipData.length; i ++) {
 
-    var obj ={};
-    obj.content = matzipData[i].comment;
+    let obj ={};
+    obj.name = matzipData[i].name;
     obj.latlng = new kakao.maps.LatLng(matzipData[i].lat, matzipData[i].lng);
 
-    positions.push(obj);
+    matzipList.push(obj);
 }
 
 
-for (var i = 0; i < positions.length; i ++) {
+for (var i = 0; i < matzipList.length; i ++) {
     // 마커를 생성합니다
-    var marker = new kakao.maps.Marker({
+    let marker = new kakao.maps.Marker({
         map: map, // 마커를 표시할 지도
-        position: positions[i].latlng // 마커의 위치
+        position: matzipList[i].latlng, // 마커의 위치
+        clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
+
     });
 
     // 마커에 표시할 인포윈도우를 생성합니다
-    var infowindow = new kakao.maps.InfoWindow({
-        content: positions[i].content // 인포윈도우에 표시할 내용
+    let infowindow = new kakao.maps.InfoWindow({
+        content: matzipList[i].name // 인포윈도우에 표시할 내용
     });
 
     // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
@@ -61,6 +62,26 @@ for (var i = 0; i < positions.length; i ++) {
     // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
     kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
     kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+
+    // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
+    //let iwContent = '<div id ="output" style="padding:5px;" ></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+    let iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
+    //document.getElementById('output').innerHTML =  matzipList[i].name;
+
+
+    // 인포윈도우를 생성합니다
+    let infowindow_click = new kakao.maps.InfoWindow({
+        content : matzipList[i].name,
+        removable : iwRemoveable
+    });
+
+    // 마커에 클릭이벤트를 등록합니다
+    kakao.maps.event.addListener(marker, 'click', function() {
+        // 마커 위에 인포윈도우를 표시합니다
+        infowindow_click.open(map, marker);
+    });
+
 }
 
 // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
@@ -77,35 +98,8 @@ function makeOutListener(infowindow) {
     };
 }
 
-/* 아래와 같이도 할 수 있습니다 */
-/*
-for (var i = 0; i < positions.length; i ++) {
-    // 마커를 생성합니다
-    var marker = new kakao.maps.Marker({
-        map: map, // 마커를 표시할 지도
-        position: positions[i].latlng // 마커의 위치
-    });
 
-    // 마커에 표시할 인포윈도우를 생성합니다
-    var infowindow = new kakao.maps.InfoWindow({
-        content: positions[i].content // 인포윈도우에 표시할 내용
-    });
 
-    // 마커에 이벤트를 등록하는 함수 만들고 즉시 호출하여 클로저를 만듭니다
-    // 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-    (function(marker, infowindow) {
-        // 마커에 mouseover 이벤트를 등록하고 마우스 오버 시 인포윈도우를 표시합니다
-        kakao.maps.event.addListener(marker, 'mouseover', function() {
-            infowindow.open(map, marker);
-        });
-
-        // 마커에 mouseout 이벤트를 등록하고 마우스 아웃 시 인포윈도우를 닫습니다
-        kakao.maps.event.addListener(marker, 'mouseout', function() {
-            infowindow.close();
-        });
-    })(marker, infowindow);
-}
-*/
 </script>
 
 <script src="/js/matzip.js"></script>
