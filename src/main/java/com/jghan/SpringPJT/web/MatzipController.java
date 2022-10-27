@@ -1,9 +1,11 @@
 package com.jghan.SpringPJT.web;
 
+import com.jghan.SpringPJT.config.auth.PrincipalDetails;
 import com.jghan.SpringPJT.domain.matzip.Matzip;
 import com.jghan.SpringPJT.service.MatzipService;
 import com.jghan.SpringPJT.web.dto.matzip.MatzipDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,3 +32,10 @@ public class MatzipController {
     }
 
 }
+
+//matzipDto.getName(),
+//        matzipDto.getCategory(),
+//        matzipDto.getAddress(),
+//        matzipDto.getUrl(),
+//        matzipDto.getLat(),
+//        matzipDto.getLng(),

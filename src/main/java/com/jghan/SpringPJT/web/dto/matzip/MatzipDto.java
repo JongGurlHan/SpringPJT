@@ -21,21 +21,28 @@ public class MatzipDto {
     private String name;
 
     @NotBlank
-    private String lat  ;
+    private String category;
+
+    @NotBlank
+    private String address;
+
+    @NotBlank
+    private String url;
+
+    @NotBlank
+    private String lat;
 
     @NotBlank
     private String lng;
 
-    @NotBlank
-    private String comment;
-
-
     public Matzip toEntity(){
         return Matzip.builder()
                 .name(name)
+                .category(category)
+                .address(address)
+                .url(url)
                 .lat(lat)
                 .lng(lng)
-                .comment(comment)
                 .build();
     }
 }

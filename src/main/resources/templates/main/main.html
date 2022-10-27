@@ -19,37 +19,38 @@
 
 
 var matzipData = matzipLoad();
-
-
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-    mapOption = {
-        center: new kakao.maps.LatLng(37.55113024763489, 127.01103376599649), // 지도의 중심좌표
-        level: 8 // 지도의 확대 레벨
-    };
-
-var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
-
-// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다
+console.log(matzipData);
 
 let matzipList =[];
 for (var i = 0; i < matzipData.length; i ++) {
 
     let obj ={};
     obj.name = matzipData[i].name;
-    obj.latlng = new kakao.maps.LatLng(matzipData[i].lat, matzipData[i].lng);
-
+    obj.latlng = new kakao.maps.LatLng(matzipData[i].lng, matzipData[i].lat);
+    obj.category = matzipData[i].category;
+    obj.address = matzipData[i].address;
+    obj.url = matzipData[i].url;
     matzipList.push(obj);
 }
 
+console.log(matzipList);
+
+var mapContainer = document.getElementById('map'),
+    mapOption = {
+        center: new kakao.maps.LatLng(37.55113024763489, 127.01103376599649),
+        level: 8 // 지도의 확대 레벨
+    };
+var map = new kakao.maps.Map(mapContainer, mapOption);
+
+
+
 
 for (var i = 0; i < matzipList.length; i ++) {
-    // 마커를 생성합니다
+
     let marker = new kakao.maps.Marker({
         map: map, // 마커를 표시할 지도
         position: matzipList[i].latlng, // 마커의 위치
-        clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
-
+        clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정
     });
 
     // 마커에 표시할 인포윈도우를 생성합니다
@@ -57,22 +58,20 @@ for (var i = 0; i < matzipList.length; i ++) {
         content: matzipList[i].name // 인포윈도우에 표시할 내용
     });
 
-    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
-    // 이벤트 리스너로는 클로저를 만들어 등록합니다
-    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
     kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
     kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
 
     // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-    //let iwContent = '<div id ="output" style="padding:5px;" ></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-    let iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-
-    //document.getElementById('output').innerHTML =  matzipList[i].name;
+    let iwContent = `<div class="info-title">${matzipList[i].name}</div>
+                       <div class="info-title">${matzipList[i].category}</div>
+                       <div class="info-title">${matzipList[i].address}</div>
+                       <a href=${matzipList[i].url}>유튜브 이동</a>`,
+         iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 
 
     // 인포윈도우를 생성합니다
     let infowindow_click = new kakao.maps.InfoWindow({
-        content : matzipList[i].name,
+        content : iwContent,
         removable : iwRemoveable
     });
 
