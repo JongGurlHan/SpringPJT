@@ -25,10 +25,14 @@ public class BoardService {
     }
 
     // 특정 게시글 불러오기
-    public Board boardView(Integer boardId){
-        return boardRepository.findById(boardId).orElseThrow(()->{
+    public Board boardView(int id){
+        return boardRepository.findById(id).orElseThrow(()->{
             throw new CustomException("해당 게시글을 찾을 수 없습니다.");
         });
+    }
+
+    public void boardDelete(int id){
+        boardRepository.deleteById(id);
     }
 
 
