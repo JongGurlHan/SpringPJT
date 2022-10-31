@@ -5,6 +5,8 @@ import com.jghan.SpringPJT.domain.board.BoardRepository;
 import com.jghan.SpringPJT.handler.ex.CustomException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -43,8 +45,8 @@ public class BoardService {
     }
 
     // 게시글 리스트 조회
-    public List<Board> boardList(){
-        return boardRepository.findAll();
+    public Page<Board> boardList(Pageable pageable){
+        return boardRepository.findAll(pageable);
     }
 
     // 특정 게시글 불러오기
