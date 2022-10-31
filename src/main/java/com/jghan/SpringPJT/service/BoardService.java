@@ -4,9 +4,16 @@ import com.jghan.SpringPJT.domain.board.Board;
 import com.jghan.SpringPJT.domain.board.BoardRepository;
 import com.jghan.SpringPJT.handler.ex.CustomException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -14,8 +21,24 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
 
+    @Value("${file.path}")
+    private String uploadFolder;
+
     //게시글 작성
-    public void write(Board board){
+    public void write(Board board, MultipartFile file) throws Exception{
+
+
+        UUID uuid = UUID.randomUUID();
+
+        String fileName = uuid + "_" + file.getOriginalFilename();
+
+        File saveFile = new File(uploadFolder, fileName);
+
+        file.transferTo(saveFile);
+
+        board.setFilename(fileName);
+        board.setFilepath(uploadFolder+fileName);
+
         boardRepository.save(board);
     }
 
