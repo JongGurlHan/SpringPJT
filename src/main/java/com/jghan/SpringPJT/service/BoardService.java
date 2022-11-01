@@ -2,6 +2,9 @@ package com.jghan.SpringPJT.service;
 
 import com.jghan.SpringPJT.domain.board.Board;
 import com.jghan.SpringPJT.domain.board.BoardRepository;
+import com.jghan.SpringPJT.domain.user.User;
+import com.jghan.SpringPJT.domain.user.UserRepository;
+import com.jghan.SpringPJT.handler.ex.CustomApiException;
 import com.jghan.SpringPJT.handler.ex.CustomException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,26 +25,24 @@ import java.util.UUID;
 public class BoardService {
 
     private final BoardRepository boardRepository;
+    private final UserRepository userRepository;
 
     @Value("${file.path}")
     private String uploadFolder;
 
     //게시글 작성
-    public void write(Board board, MultipartFile file) throws Exception{
+    public void write(Board board, int principalId){
 
+        User userEntity = userRepository.findById(principalId).orElseThrow(()->{
+            throw new CustomApiException("유저아이디를 찾을수 없습니다.");
+        });
 
-        UUID uuid = UUID.randomUUID();
+        Board boardEntity = new Board();
+        boardEntity.setTitle(board.getTitle());
+        boardEntity.setContent(boardEntity.getContent());
+        boardEntity.setUser(userEntity);
 
-        String fileName = uuid + "_" + file.getOriginalFilename();
-
-        File saveFile = new File(uploadFolder, fileName);
-
-        file.transferTo(saveFile);
-
-        board.setFilename(fileName);
-        board.setFilepath(uploadFolder+fileName);
-
-        boardRepository.save(board);
+        boardRepository.save(boardEntity);
     }
 
     // 게시글 리스트 조회

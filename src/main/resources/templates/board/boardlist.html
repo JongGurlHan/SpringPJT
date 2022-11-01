@@ -23,6 +23,7 @@
             <tr>
                 <th>글 번호</th>
                 <th>제목</th>
+                <th>작성일자</th>
             </tr>
           </thead>
           <tbody>
@@ -30,9 +31,11 @@
                   <td th:text="${board.id}">1</td>
                   <td>
                     <a th:text="${board.title}" th:href="@{|/board/view/${board.id}|}">
-
                     </a>
                   </td>
+                  <td th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd')}"></td>
+
+
               </tr>
 
           </tbody>

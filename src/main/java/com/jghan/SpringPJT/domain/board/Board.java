@@ -1,5 +1,6 @@
 package com.jghan.SpringPJT.domain.board;
 
+import com.jghan.SpringPJT.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,8 +24,12 @@ public class Board {
     private String title;
     private String content;
 
-    private String filename;
-    private String filepath;
+    @JoinColumn(name = "userId")
+    @ManyToOne
+    private User user;
+
+//    private String filename;
+//    private String filepath;
 
     private LocalDateTime createDate;
 
