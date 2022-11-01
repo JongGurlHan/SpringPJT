@@ -5,10 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 
 @Builder
@@ -28,4 +26,10 @@ public class Board {
     private String filename;
     private String filepath;
 
+    private LocalDateTime createDate;
+
+    @PrePersist //db에 INSERT되기전에 실행
+    public void createData() {
+        this.createDate = LocalDateTime.now();
+    }
 }

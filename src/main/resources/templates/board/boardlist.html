@@ -14,6 +14,9 @@
 
 </style>
 <body>
+
+    <div th:replace="layout/header" :: menu />
+
   <div class="layout">
       <table>
           <thead>
@@ -36,9 +39,15 @@
 
       </table>
       <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
-        <a th:if="${page != nowPage}" th:href="@{/board/list(page = ${page -1})}" th:text="${page}"></a>
+        <a th:if="${page != nowPage}" th:href="@{/board/list(page = ${page -1}, searchKeyword = ${param.searchKeyword})}" th:text="${page}"></a>
         <strong th:if="${page == nowPage}"  th:text="${page}" style="color : red"></strong>
       </th:block>
+      <form th:action="@{/board/list}" method="get">
+          <input type="text" name="searchKeyword">
+          <button type="submit">검색</button>
+      </form>
+      <a class="nav-link" th:href="@{/board/write}">글작성</a>
+
 
   </div>
 
