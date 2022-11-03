@@ -41,6 +41,7 @@ public class BoardController {
         Board board = boardDto.toEntity();
         boardService.write(board, principalDetails.getUser().getId());
 
+
         model.addAttribute("message", "글 작성이 완료됐습니다.");
         model.addAttribute("url", "/board/list");
         return "message/message";
@@ -95,17 +96,23 @@ public class BoardController {
         return "board/modify";
     }
 
-//    @PostMapping("/board/update/{id}")
-//    public String boardUpdate(@PathVariable int id, Board board) throws Exception{
-//
+    @PostMapping("/board/update/{id}")
+    public String boardUpdate(@PathVariable int id,
+                              @Valid BoardDto boardDto,
+                              BindingResult bindingResult) {
+
 //        Board boardTemp = boardService.boardView(id);
 //        boardTemp.setTitle(board.getTitle());
 //        boardTemp.setContent(board.getContent());
-//
-//        boardService.write(boardTemp);
-//
-//        return "redirect:/board/list";
-//    }
+
+//        System.out.println("boardDto:"+ boardDto);
+
+        Board newBoard = boardService.update(id, boardDto.toEntity());
+
+        System.out.println("newBoard:" + newBoard);
+
+        return "redirect:/board/list";
+    }
 
 
 }

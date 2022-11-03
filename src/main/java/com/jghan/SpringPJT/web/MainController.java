@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController { //추후 이름변경
 
-    @GetMapping({"/"})
-    public String story(@AuthenticationPrincipal PrincipalDetails principalDetails,
+    @GetMapping("/")
+    public String main(@AuthenticationPrincipal PrincipalDetails principalDetails,
                         Model model){
 
         model.addAttribute("user", principalDetails.getUser());

@@ -6,6 +6,7 @@ import com.jghan.SpringPJT.domain.user.User;
 import com.jghan.SpringPJT.domain.user.UserRepository;
 import com.jghan.SpringPJT.handler.ex.CustomApiException;
 import com.jghan.SpringPJT.handler.ex.CustomException;
+import com.jghan.SpringPJT.handler.ex.CustomValidationApiException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -39,11 +40,33 @@ public class BoardService {
 
         Board boardEntity = new Board();
         boardEntity.setTitle(board.getTitle());
-        boardEntity.setContent(boardEntity.getContent());
+        boardEntity.setContent(board.getContent());
         boardEntity.setUser(userEntity);
 
         boardRepository.save(boardEntity);
     }
+    
+    public Board update(int id, Board board){
+
+        Board boardEntity = boardRepository.findById(id).orElseThrow(() -> {
+            return new CustomValidationApiException("찾을 수 없는 게시글입니다.");
+        });
+
+        System.out.println("제목:" +board.getTitle());
+        System.out.println("내용:" +board.getContent());
+
+        boardEntity.setTitle(board.getTitle());
+        boardEntity.setContent(board.getContent());
+
+        System.out.println("수정내용:"+ boardEntity);
+
+        boardRepository.save(boardEntity);
+
+        return boardEntity;
+
+    }
+    
+    
 
     // 게시글 리스트 조회
     public Page<Board> boardList(Pageable pageable){
