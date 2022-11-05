@@ -6,8 +6,9 @@
 </head>
 
 <style>
-    .layout {
-        width : 500px;
+
+     .layout {
+        width : 700px;
         margin : 0 auto;
         margin-top : 40px;
     }
@@ -16,119 +17,86 @@
 <body>
 
     <div th:replace="layout/header" :: menu />
-
-  <div class="layout">
-      <table>
-          <thead>
-            <tr>
-                <th>글 번호</th>
-                <th>제목</th>
-                <th>작성일자</th>
-            </tr>
-          </thead>
-          <tbody>
-              <tr th:each="board : ${list}">
-                  <td th:text="${board.id}">1</td>
-                  <td>
-                    <a th:text="${board.title}" th:href="@{|/board/view/${board.id}|}">
-                    </a>
-                  </td>
-                  <td th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd')}"></td>
+    <div class="layout">
 
 
-              </tr>
+    <nav class="container">
+        <br>
+        <form class="input-group" th:action="@{/board/list}" method="get">
+            <input type="text" class="form-control"  name="searchKeyword" placeholder="검색 키워드를 입력해주세요.">
+            <button type="submit" class="btn btn-secondary">검색</button>
+        </form>
+        <br>
+        <form>
+            <table class="table table-hover">
+                <colgroup>
+                    <col width="20%" />
+                    <col width="40%" />
+<!--                    <col width="20%" />-->
+                    <col width="40%" />
+<!--                    <col width="10%" />-->
+                </colgroup>
+                <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+<!--                    <th>작성자</th>-->
+                    <th>날짜</th>
+<!--                    <th>조회수</th>-->
+                </tr>
+                </thead>
 
-          </tbody>
-
-      </table>
-      <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
-        <a th:if="${page != nowPage}" th:href="@{/board/list(page = ${page -1}, searchKeyword = ${param.searchKeyword})}" th:text="${page}"></a>
-        <strong th:if="${page == nowPage}"  th:text="${page}" style="color : red"></strong>
-      </th:block>
-      <form th:action="@{/board/list}" method="get">
-          <input type="text" name="searchKeyword">
-          <button type="submit">검색</button>
-      </form>
-      <a class="nav-link" th:href="@{/board/write}">글작성</a>
-
-
-  </div>
-
-        <nav class="container">
+                <tbody>
+                <tr th:each="board : ${list}">>
+                    <td th:text="${board.id}">1</td>
+                    <td>
+                        <a th:text="${board.title}" th:href="@{|/board/view/${board.id}|}">제목</a>
+                    </td>
+<!--                    <td th:text="${board.user}">작성자</td>-->
+                    <td th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd')}"></td>
+<!--                    <td>1</td>-->
+                </tr>
+                </tbody>
+            </table>
             <br>
-            <form class="input-group" th:action="@{/board/list}" method="get">
-                <input type="text" class="form-control" placeholder="검색 키워드를 입력해주세요.">
-                <button type="submit" class="btn btn-secondary">검색</button>
-            </form>
+            <!-- ADMIN 권한일경우에만 글쓰기 권한있음 -->
+            <div class="d-flex justify-content-end">
+                <a class="btn btn-primary" th:href="@{/board/write}">글작성</a>
+            </div>
             <br>
-            <form>
-                <table class="table table-hover">
-                    <colgroup>
-                        <col width="2%" />
-                        <col width="5%" />
-                        <col width="20%" />
-                        <col width="5%" />
-                        <col width="5%" />
-                        <col width="5%" />
-                        <col width="5%" />
-                    </colgroup>
-                    <thead>
-                    <tr>
-                        <th>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="allCheckBox" class="chk">
-                            </label>
-                        </th>
-                        <th>번호</th>
-                        <th>제목</th>
-                        <th>작성자</th>
-                        <th>날짜</th>
-                        <th>조회수</th>
-                        <th>파일유무</th>
-                    </tr>
-                    </thead>
+            <nav class="container d-flex align-items-center justify-content-center" aria-label="Page navigation example">
+                <ul class="pagination">
 
-                    <tbody>
-                    <tr th:each="board : ${list}">>
-                        <td>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" class="chk" name="chk" value="">
-                            </label>
-                        <td>1</td>
-                        <td><a href=""></a>제목입니다.</td>
-                        <td>작성자</td>
-                        <td>2022.08.01</td>
-                        <td>1</td>
-                        <td>이미지</td>
-                    </tr>
-                    </tbody>
-                </table>
-                <br>
-                <!-- ADMIN 권한일경우에만 글쓰기 권한있음 -->
-                <div class="d-flex justify-content-end">
-                    <a class="btn btn-danger">글삭제</a>
-                    <a href="/write" class="btn btn-primary">글쓰기</a>
-                </div>
-                <br>
-                <nav class="container d-flex align-items-center justify-content-center" aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
+                    <a th:if="${page != nowPage}" th:href="@{/board/list(page = ${page -1}, searchKeyword = ${param.searchKeyword})}" th:text="${page}"></a>
+                    <strong th:if="${page == nowPage}"  th:text="${page}" style="color : red"></strong>
+                </th:block>
+
+                </ul>
+            </nav>
+
+
+<!--                <nav class="container d-flex align-items-center justify-content-center" aria-label="Page navigation example">-->
+<!--                    <ul class="pagination">-->
+<!--                        <li class="page-item">-->
+<!--                            <a class="page-link" href="#" aria-label="Previous">-->
+<!--                                <span aria-hidden="true">&laquo;</span>-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                        <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+<!--                        <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+<!--                        <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+<!--                        <li class="page-item">-->
+<!--                            <a class="page-link" href="#" aria-label="Next">-->
+<!--                                <span aria-hidden="true">&raquo;</span>-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </nav>-->
             </form>
         </nav>
+    </div>
+
 
 </body>
 </html>

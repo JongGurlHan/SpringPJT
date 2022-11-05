@@ -1,5 +1,7 @@
 package com.jghan.SpringPJT.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.jghan.SpringPJT.domain.board.Board;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -34,6 +37,7 @@ public class User {
 
 
     private LocalDateTime createDate;
+
 
     @PrePersist
     public void createDate(){

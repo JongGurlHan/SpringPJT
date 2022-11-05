@@ -1,5 +1,6 @@
 package com.jghan.SpringPJT.domain.board;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.jghan.SpringPJT.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
