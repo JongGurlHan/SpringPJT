@@ -27,15 +27,7 @@ public class MatzipController {
     public String matzipRegist(@Valid MatzipDto matzipDto){
         Matzip matzip = matzipDto.toEntity();
         matzipService.register(matzip);
-        System.out.println(matzip);
         return "matzip/input";
     }
 
 }
-
-//matzipDto.getName(),
-//        matzipDto.getCategory(),
-//        matzipDto.getAddress(),
-//        matzipDto.getUrl(),
-//        matzipDto.getLat(),
-//        matzipDto.getLng(),

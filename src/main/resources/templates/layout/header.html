@@ -32,25 +32,30 @@
       <li class="nav-item active">
         <a class="nav-link" href="/">홈화면 <span class="sr-only">(current)</span></a>
       </li>
+
       <li class="nav-item">
         <a class="nav-link" href="/matzip/input">맛집등록</a>
       </li>
+
       <li class="nav-item">
         <a class="nav-link " href="/board/list">업데이트내역</a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-        <div class="dropdown-menu" aria-labelledby="dropdown05">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+
+      <li class="nav-item" onclick="modalInfo()">
+        <div class="modal">
+          <button onclick="location.href='/user/1/update'">회원정보 변경</button>
+          <button onclick="location.href='/logout'">로그아웃</button>
+          <button onclick="closePopup('.modal-info')">취소</button>
         </div>
       </li>
+
     </ul>
-    <form class="form-inline my-2 my-md-0">
-      <input class="form-control" type="text" placeholder="Search">
-    </form>
+
+
+
   </div>
+
+
 </nav>
 
 <!--&lt;!&ndash; Option 1: jQuery and Bootstrap Bundle (includes Popper) &ndash;&gt;-->

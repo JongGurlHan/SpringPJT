@@ -101,15 +101,8 @@ public class BoardController {
                               @Valid BoardDto boardDto,
                               BindingResult bindingResult) {
 
-//        Board boardTemp = boardService.boardView(id);
-//        boardTemp.setTitle(board.getTitle());
-//        boardTemp.setContent(board.getContent());
-
-//        System.out.println("boardDto:"+ boardDto);
 
         Board newBoard = boardService.update(id, boardDto.toEntity());
-
-        System.out.println("newBoard:" + newBoard);
 
         return "redirect:/board/list";
     }
