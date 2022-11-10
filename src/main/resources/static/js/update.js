@@ -1,4 +1,4 @@
-// (1) 회원정보 수정
+// 회원정보 수정
 
 function update(userId, event) {
     event.preventDefault(); //폼태그 액션을 막기
@@ -18,7 +18,7 @@ function update(userId, event) {
     }).done(res =>{ //Http상태코드 200번대 done이 뜬다.
         console.log("update 성공", res);  //res-> js오브젝트가 된다.
         alert("update 성공");
-        location.href = `/user/${userId}`;
+        location.href = `/user/${userId}/update`;
     }).fail(error => {
         console.log("실패", error);
        if(error.data ==null){ //errorMap이 없을 경우
